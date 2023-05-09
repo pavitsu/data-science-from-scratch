@@ -137,7 +137,7 @@ def main():
                     break  # done with this file
     
     import random
-    from scratch.machine_learning import split_data
+    from solution.machine_learning import split_data
     
     random.seed(0)      # just so you get the same answers as me
     train_messages, test_messages = split_data(data, 0.75)

@@ -288,7 +288,7 @@ for document, topic_counts in zip(documents, document_topic_counts):
             print(topic_names[topic], count)
     print()
 
-from scratch.linear_algebra import dot, Vector
+from solution.linear_algebra import dot, Vector
 import math
 
 def cosine_similarity(v1: Vector, v2: Vector) -> float:
@@ -320,7 +320,7 @@ NUM_SENTENCES = 50
 random.seed(0)
 sentences = [make_sentence() for _ in range(NUM_SENTENCES)]
 
-from scratch.deep_learning import Tensor
+from solution.deep_learning import Tensor
 
 class Vocabulary:
     def __init__(self, words: List[str] = None) -> None:
@@ -381,7 +381,7 @@ def load_vocab(filename: str) -> Vocabulary:
     return vocab
 
 from typing import Iterable
-from scratch.deep_learning import Layer, Tensor, random_tensor, zeros_like
+from solution.deep_learning import Layer, Tensor, random_tensor, zeros_like
 
 class Embedding(Layer):
     def __init__(self, num_embeddings: int, embedding_dim: int) -> None:
@@ -443,7 +443,7 @@ class TextEmbedding(Embedding):
 
         return scores[:n]
 
-from scratch.deep_learning import tensor_apply, tanh
+from solution.deep_learning import tensor_apply, tanh
 
 class SimpleRnn(Layer):
     """Just about the simplest possible recurrent layer."""
@@ -535,7 +535,7 @@ def main():
                        for sentence_words in tokenized_sentences
                        for word in sentence_words)
     
-    from scratch.deep_learning import Tensor, one_hot_encode
+    from solution.deep_learning import Tensor, one_hot_encode
     
     inputs: List[int] = []
     targets: List[Tensor] = []
@@ -555,7 +555,7 @@ def main():
     
     # Model for learning word vectors
     
-    from scratch.deep_learning import Sequential, Linear
+    from solution.deep_learning import Sequential, Linear
     
     random.seed(0)
     EMBEDDING_DIM = 5  # seems like a good size
@@ -573,7 +573,7 @@ def main():
     
     # Train the word vector model
     
-    from scratch.deep_learning import SoftmaxCrossEntropy, Momentum, GradientDescent
+    from solution.deep_learning import SoftmaxCrossEntropy, Momentum, GradientDescent
     
     loss = SoftmaxCrossEntropy()
     optimizer = GradientDescent(learning_rate=0.01)
@@ -606,7 +606,7 @@ def main():
     # Plot word vectors
     plt.close()
     
-    from scratch.working_with_data import pca, transform
+    from solution.working_with_data import pca, transform
     import matplotlib.pyplot as plt
     
     # Extract the first two principal components and transform the word vectors
@@ -666,7 +666,7 @@ def main():
         linear
     ])
     
-    from scratch.deep_learning import softmax
+    from solution.deep_learning import softmax
     
     def generate(seed: str = START, max_len: int = 50) -> str:
         rnn1.reset_hidden_state()  # Reset both hidden states.

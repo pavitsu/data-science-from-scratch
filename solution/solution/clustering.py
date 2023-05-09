@@ -1,4 +1,4 @@
-from scratch.linear_algebra import Vector
+from solution.linear_algebra import Vector
 
 def num_differences(v1: Vector, v2: Vector) -> int:
     assert len(v1) == len(v2)
@@ -8,7 +8,7 @@ assert num_differences([1, 2, 3], [2, 1, 3]) == 2
 assert num_differences([1, 2], [1, 2]) == 0
 
 from typing import List
-from scratch.linear_algebra import vector_mean
+from solution.linear_algebra import vector_mean
 
 def cluster_means(k: int,
                   inputs: List[Vector],
@@ -25,7 +25,7 @@ def cluster_means(k: int,
 import itertools
 import random
 import tqdm
-from scratch.linear_algebra import squared_distance
+from solution.linear_algebra import squared_distance
 
 class KMeans:
     def __init__(self, k: int) -> None:
@@ -84,7 +84,7 @@ def get_values(cluster: Cluster) -> List[Vector]:
 assert get_values(merged) == [[10, 20], [30, -15]]
 
 from typing import Callable
-from scratch.linear_algebra import distance
+from solution.linear_algebra import distance
 
 def cluster_distance(cluster1: Cluster,
                      cluster2: Cluster,

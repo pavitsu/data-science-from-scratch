@@ -57,7 +57,7 @@ def make_user_interest_vector(user_interests: List[str]) -> List[int]:
 user_interest_vectors = [make_user_interest_vector(user_interests)
                          for user_interests in users_interests]
 
-from scratch.nlp import cosine_similarity
+from solution.nlp import cosine_similarity
 
 user_similarities = [[cosine_similarity(interest_vector_i, interest_vector_j)
                       for interest_vector_j in user_interest_vectors]
@@ -264,7 +264,7 @@ def main():
     
     # Embedding vectors for matrix factorization model
     
-    from scratch.deep_learning import random_tensor
+    from solution.deep_learning import random_tensor
     
     EMBEDDING_DIM = 2
     
@@ -283,7 +283,7 @@ def main():
     
     from typing import List
     import tqdm
-    from scratch.linear_algebra import dot
+    from solution.linear_algebra import dot
     
     def loop(dataset: List[Rating],
              learning_rate: float = None) -> None:
@@ -319,7 +319,7 @@ def main():
     loop(test)
     
     
-    from scratch.working_with_data import pca, transform
+    from solution.working_with_data import pca, transform
     
     original_vectors = [vector for vector in movie_vectors.values()]
     components = pca(original_vectors, 2)

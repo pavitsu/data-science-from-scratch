@@ -96,7 +96,7 @@ def farness(user_id: int) -> float:
 
 closeness_centrality = {user.id: 1 / farness(user.id) for user in users}
 
-from scratch.linear_algebra import Matrix, make_matrix, shape
+from solution.linear_algebra import Matrix, make_matrix, shape
 
 def matrix_times_matrix(m1: Matrix, m2: Matrix) -> Matrix:
     nr1, nc1 = shape(m1)
@@ -109,7 +109,7 @@ def matrix_times_matrix(m1: Matrix, m2: Matrix) -> Matrix:
 
     return make_matrix(nr1, nc2, entry_fn)
 
-from scratch.linear_algebra import Vector, dot
+from solution.linear_algebra import Vector, dot
 
 def matrix_times_vector(m: Matrix, v: Vector) -> Vector:
     nr, nc = shape(m)
@@ -120,7 +120,7 @@ def matrix_times_vector(m: Matrix, v: Vector) -> Vector:
 
 from typing import Tuple
 import random
-from scratch.linear_algebra import magnitude, distance
+from solution.linear_algebra import magnitude, distance
 
 def find_eigenvector(m: Matrix,
                      tolerance: float = 0.00001) -> Tuple[Vector, float]:

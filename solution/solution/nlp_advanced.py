@@ -1,4 +1,4 @@
-from scratch.deep_learning import Optimizer, Layer
+from solution.deep_learning import Optimizer, Layer
 
 class EmbeddingOptimizer(Optimizer):
     """

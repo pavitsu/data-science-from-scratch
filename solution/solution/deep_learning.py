@@ -103,7 +103,7 @@ class Layer:
         """
         return ()
 
-from scratch.neural_networks import sigmoid
+from solution.neural_networks import sigmoid
 
 class Sigmoid(Layer):
     def forward(self, input: Tensor) -> Tensor:
@@ -121,7 +121,7 @@ class Sigmoid(Layer):
 
 import random
 
-from scratch.probability import inverse_normal_cdf
+from solution.probability import inverse_normal_cdf
 
 def random_uniform(*dims: int) -> Tensor:
     if len(dims) == 1:
@@ -153,7 +153,7 @@ def random_tensor(*dims: int, init: str = 'normal') -> Tensor:
     else:
         raise ValueError(f"unknown init: {init}")
 
-from scratch.linear_algebra import dot
+from solution.linear_algebra import dot
 
 class Linear(Layer):
     def __init__(self, input_dim: int, output_dim: int, init: str = 'xavier') -> None:
@@ -432,7 +432,7 @@ assert one_hot_encode(3) == [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 assert one_hot_encode(2, num_labels=5) == [0, 0, 1, 0, 0]
 
 
-from scratch.linear_algebra import squared_distance
+from solution.linear_algebra import squared_distance
 
 import json
 
@@ -494,7 +494,7 @@ def main():
     
     # FizzBuzz Revisited
     
-    from scratch.neural_networks import binary_encode, fizz_buzz_encode, argmax
+    from solution.neural_networks import binary_encode, fizz_buzz_encode, argmax
     
     xs = [binary_encode(n) for n in range(101, 1024)]
     ys = [fizz_buzz_encode(n) for n in range(101, 1024)]

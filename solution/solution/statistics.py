@@ -1,9 +1,43 @@
-from solution import statistics
-from collections import Counter
 
-# print(statistics.num_friends)
-num_friends = statistics.num_friends
-from typing import List, Dict
+num_friends = [100.0,49,41,40,25,21,21,19,19,18,18,16,15,15,15,15,14,14,13,13,13,13,12,12,11,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,8,8,8,8,8,8,8,8,8,8,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+
+from collections import Counter
+import matplotlib.pyplot as plt
+
+friend_counts = Counter(num_friends)
+xs = range(101)                         # largest value is 100
+ys = [friend_counts[x] for x in xs]     # height is just # of friends
+plt.bar(xs, ys)
+plt.axis([0, 101, 0, 25])
+plt.title("Histogram of Friend Counts")
+plt.xlabel("# of friends")
+plt.ylabel("# of people")
+# plt.show()
+
+num_points = len(num_friends)               # 204
+
+
+assert num_points == 204
+
+largest_value = max(num_friends)            # 100
+smallest_value = min(num_friends)           # 1
+
+
+assert largest_value == 100
+assert smallest_value == 1
+
+sorted_values = sorted(num_friends)
+smallest_value = sorted_values[0]           # 1
+second_smallest_value = sorted_values[1]    # 1
+second_largest_value = sorted_values[-2]    # 49
+
+
+assert smallest_value == 1
+assert second_smallest_value == 1
+assert second_largest_value == 49
+
+
+from typing import List
 
 def mean(xs: List[float]) -> float:
     return sum(xs) / len(xs)
@@ -17,16 +51,18 @@ assert 7.3333 < mean(num_friends) < 7.3334
 # intended to be called by our median function but not by other people
 # using our statistics library.
 def _median_odd(xs: List[float]) -> float:
-    return sorted(xs)[len(xs)//2]
+    """If len(xs) is odd, the median is the middle element"""
+    return sorted(xs)[len(xs) // 2]
 
 def _median_even(xs: List[float]) -> float:
+    """If len(xs) is even, it's the average of the middle two elements"""
     sorted_xs = sorted(xs)
-    middle_right_pos = len(xs)//2
-    middle_left_pos = middle_right_pos-1
-    return (sorted_xs[middle_left_pos] + sorted_xs[middle_right_pos])/2
+    hi_midpoint = len(xs) // 2  # e.g. length 4 => hi_midpoint 2
+    return (sorted_xs[hi_midpoint - 1] + sorted_xs[hi_midpoint]) / 2
 
 def median(v: List[float]) -> float:
-    return _median_even(v) if len(v)%2 == 0 else _median_odd(v)
+    """Finds the 'middle-most' value of v"""
+    return _median_even(v) if len(v) % 2 == 0 else _median_odd(v)
 
 assert median([1, 10, 2, 9, 5]) == 5
 assert median([1, 9, 2, 10]) == (2 + 9) / 2
@@ -35,10 +71,10 @@ assert median([1, 9, 2, 10]) == (2 + 9) / 2
 assert median(num_friends) == 6
 
 def quantile(xs: List[float], p: float) -> float:
-    pos =  int(len(xs) * p)
-    return sorted(xs)[pos]
+    """Returns the pth-percentile value in x"""
+    p_index = int(p * len(xs))
+    return sorted(xs)[p_index]
 
-assert quantile(num_friends, 0.50) == 6
 assert quantile(num_friends, 0.10) == 1
 assert quantile(num_friends, 0.25) == 3
 assert quantile(num_friends, 0.75) == 9
@@ -46,12 +82,10 @@ assert quantile(num_friends, 0.90) == 13
 
 def mode(x: List[float]) -> List[float]:
     """Returns a list, since there might be more than one mode"""
-    cnt: Dict[float, float] = {}
-    for x_i in x:
-        cnt[x_i] = cnt.get(x_i, 0) + 1
-    max_value = max(cnt.values())
-    return [k for k,v in cnt.items() if v == max_value]
-
+    counts = Counter(x)
+    max_count = max(counts.values())
+    return [x_i for x_i, count in counts.items()
+            if count == max_count]
 
 assert set(mode(num_friends)) == {1, 6}
 
@@ -64,24 +98,31 @@ assert data_range(num_friends) == 99
 from solution.linear_algebra import sum_of_squares
 
 def de_mean(xs: List[float]) -> List[float]:
-    return
+    """Translate xs by subtracting its mean (so the result has mean 0)"""
+    x_bar = mean(xs)
+    return [x - x_bar for x in xs]
 
 def variance(xs: List[float]) -> float:
-    return
+    """Almost the average squared deviation from the mean"""
+    assert len(xs) >= 2, "variance requires at least two elements"
 
+    n = len(xs)
+    deviations = de_mean(xs)
+    return sum_of_squares(deviations) / (n - 1)
 
 assert 81.54 < variance(num_friends) < 81.55
 
 import math
 
 def standard_deviation(xs: List[float]) -> float:
-    return
-
+    """The standard deviation is the square root of the variance"""
+    return math.sqrt(variance(xs))
 
 assert 9.02 < standard_deviation(num_friends) < 9.04
 
 def interquartile_range(xs: List[float]) -> float:
-    return
+    """Returns the difference between the 75%-ile and the 25%-ile"""
+    return quantile(xs, 0.75) - quantile(xs, 0.25)
 
 assert interquartile_range(num_friends) == 6
 
@@ -93,13 +134,21 @@ daily_hours = [dm / 60 for dm in daily_minutes]
 from solution.linear_algebra import dot
 
 def covariance(xs: List[float], ys: List[float]) -> float:
-    return
+    assert len(xs) == len(ys), "xs and ys must have same number of elements"
+
+    return dot(de_mean(xs), de_mean(ys)) / (len(xs) - 1)
 
 assert 22.42 < covariance(num_friends, daily_minutes) < 22.43
 assert 22.42 / 60 < covariance(num_friends, daily_hours) < 22.43 / 60
 
 def correlation(xs: List[float], ys: List[float]) -> float:
-    return 
+    """Measures how much xs and ys vary in tandem about their means"""
+    stdev_x = standard_deviation(xs)
+    stdev_y = standard_deviation(ys)
+    if stdev_x > 0 and stdev_y > 0:
+        return covariance(xs, ys) / stdev_x / stdev_y
+    else:
+        return 0    # if no variation, correlation is zero
 
 assert 0.24 < correlation(num_friends, daily_minutes) < 0.25
 assert 0.24 < correlation(num_friends, daily_hours) < 0.25

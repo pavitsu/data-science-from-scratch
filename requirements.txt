@@ -25,3 +25,6 @@ mnist
 
 # For parsing dates
 python-dateutil
+
+# For checking typing
+mypy

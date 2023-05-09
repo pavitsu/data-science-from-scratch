@@ -25,7 +25,7 @@ def majority_vote(labels: List[str]) -> str:
 assert majority_vote(['a', 'b', 'c', 'b', 'a']) == 'b'
 
 from typing import NamedTuple
-from scratch.linear_algebra import Vector, distance
+from solution.linear_algebra import Vector, distance
 
 class LabeledPoint(NamedTuple):
     point: Vector
@@ -107,7 +107,7 @@ def main():
     plt.gca().clear()
     
     import random
-    from scratch.machine_learning import split_data
+    from solution.machine_learning import split_data
     
     random.seed(12)
     iris_train, iris_test = split_data(iris_data, 0.70)

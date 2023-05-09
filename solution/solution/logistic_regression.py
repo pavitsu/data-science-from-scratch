@@ -16,7 +16,7 @@ def logistic_prime(x: float) -> float:
     return y * (1 - y)
 
 import math
-from scratch.linear_algebra import Vector, dot
+from solution.linear_algebra import Vector, dot
 
 def _negative_log_likelihood(x: Vector, y: float, beta: Vector) -> float:
     """The negative log likelihood for one data point"""
@@ -33,7 +33,7 @@ def negative_log_likelihood(xs: List[Vector],
     return sum(_negative_log_likelihood(x, y, beta)
                for x, y in zip(xs, ys))
 
-from scratch.linear_algebra import vector_sum
+from solution.linear_algebra import vector_sum
 
 def _negative_log_partial_j(x: Vector, y: float, beta: Vector, j: int) -> float:
     """
@@ -63,9 +63,9 @@ def main():
     plt.gca().clear()
     
     from matplotlib import pyplot as plt
-    from scratch.working_with_data import rescale
-    from scratch.multiple_regression import least_squares_fit, predict
-    from scratch.gradient_descent import gradient_step
+    from solution.working_with_data import rescale
+    from solution.multiple_regression import least_squares_fit, predict
+    from solution.gradient_descent import gradient_step
     
     learning_rate = 0.001
     rescaled_xs = rescale(xs)
@@ -82,7 +82,7 @@ def main():
     plt.savefig('im/linear_regression_for_probabilities.png')
     plt.close()
     
-    from scratch.machine_learning import train_test_split
+    from solution.machine_learning import train_test_split
     import random
     import tqdm
     
@@ -101,7 +101,7 @@ def main():
             loss = negative_log_likelihood(x_train, y_train, beta)
             t.set_description(f"loss: {loss:.3f} beta: {beta}")
     
-    from scratch.working_with_data import scale
+    from solution.working_with_data import scale
     
     means, stdevs = scale(xs)
     beta_unscaled = [(beta[0]
