@@ -1,5 +1,18 @@
-Data Science from Scratch
+# Data Science from Scratch
+
 =========================
+
+## Setup
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+```
+
+```bash
+python3 -m pip install pip setuptools wheel && python3 -m pip install -e . && pip install solution/
+```
+
+## Introduction
 
 Here's all the code and examples from the second edition of my book _Data Science from Scratch_. They require at least Python 3.6.
 
@@ -7,7 +20,7 @@ Here's all the code and examples from the second edition of my book _Data Scienc
 
 If you want to use the code, you should be able to clone the repo and just do things like
 
-```
+```python
 In [1]: from scratch.linear_algebra import dot
 
 In [2]: dot([1, 2, 3], [4, 5, 6])
@@ -20,9 +33,9 @@ Two notes:
 
 1. In order to use the library like this, you need to be in the root directory (that is, the directory that contains the `scratch` folder). If you are in the `scratch` directory itself, the imports won't work.
 
-2. It's possible that it will just work. It's also possible that you may need to add the root directory to your `PYTHONPATH`, if you are on Linux or OSX this is as simple as 
+2. It's possible that it will just work. It's also possible that you may need to add the root directory to your `PYTHONPATH`, if you are on Linux or OSX this is as simple as
 
-```
+```bash
 export PYTHONPATH=/path/to/where/you/cloned/this/repo
 ```
 
